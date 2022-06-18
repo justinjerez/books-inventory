@@ -17,6 +17,6 @@ namespace BookList.Models
         /**
          *  Database model Book
          */
-        public DbSet<Book> Books { get; set; }
+        public DbSet<Book> Book { get; set; }
     }
 }
