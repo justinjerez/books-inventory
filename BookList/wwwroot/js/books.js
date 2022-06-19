@@ -21,9 +21,9 @@ const loadDataTable = () => {
                 "render": function (data) {
                     return `
                         <div class="text-center">
-                            <a href="/Books/Edit?id=${data}" class="btn btn-success text-white">Edit</a>
+                            <a href="/Books/Upsert?id=${data}" class="btn btn-success text-white">Edit</a>
                             &nbsp;
-                            <a class="btn btn-danger text-white">Delete</a>
+                            <a onclick="Delete('api/books?id=' + ${data})" class="btn btn-danger text-white">Delete</a>
                         </div>
                     `
                 },
@@ -34,5 +34,31 @@ const loadDataTable = () => {
             "emptyTable": "No data found."
         },
         "width": "100%"
+    });
+}
+
+const Delete = (url) => {
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not able to recover this book information.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    }).then((res) => {
+        if (res) {
+            $.ajax({
+                type: "DELETE",
+                url: url,
+                success: (data) => {
+                    if (data.success) {
+                        toastr.success(data.message);
+                        dataTable.ajax.reload();
+                    }
+                    else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
     });
 }
