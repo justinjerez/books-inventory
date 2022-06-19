@@ -28,6 +28,9 @@ namespace BookList
             // Adding database connection and models
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            // Dependency for API
+            services.AddControllersWithViews();
+
             services.AddRazorPages();
         }
 
@@ -54,6 +57,9 @@ namespace BookList
 
             app.UseEndpoints(endpoints =>
             {
+                // Dependency for API
+                endpoints.MapControllers();
+
                 endpoints.MapRazorPages();
             });
         }
