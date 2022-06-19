@@ -24,7 +24,12 @@
                         <th>
                             <label asp-for="Books.FirstOrDefault().Author"></label>
                         </th>
-                        <th>ISBN</th>
+                        <th>
+                            <label asp-for="Books.FirstOrDefault().Description"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Books.FirstOrDefault().ISBN"></label>
+                        </th>
                         <th></th>
                     </tr>
                     @foreach(var book in Model.Books)
@@ -35,6 +40,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(m=>book.Author)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m=>book.Description)
                             </td>
                             <td>
                                 @Html.DisplayFor(m=>book.ISBN)
